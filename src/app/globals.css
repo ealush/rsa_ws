@@ -1,0 +1,133 @@
+:root {
+  --max-width: 500px;
+  --max-height: 800px;
+  
+  /* Professional Palette (Based on Image Top Row) */
+  --primary: #0288d1; /* Strong Blue */
+  --primary-hover: #0277bd;
+  --bg-color: #e1f5fe; /* Lightest Blue */
+  --text-primary: #263238; /* Dark Blue Grey */
+  --text-secondary: #546e7a; /* Blue Grey 600 */
+  
+  /* Glassmorphism Tokens - Clean & Airy */
+  --glass-bg: rgba(255, 255, 255, 0.4); /* More transparent for better blur */
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 4px 20px rgba(2, 136, 209, 0.08);
+  --glass-blur: 6px;
+
+  /* Component Tokens */
+  --item-bg: rgba(255, 255, 255, 0.5);
+  --item-bg-hover: rgba(255, 255, 255, 0.8);
+  --item-border: rgba(255, 255, 255, 0.4);
+  --message-bubble-bg: #FFFFFF;
+  --input-bg: #FFFFFF;
+  --tab-active-text: var(--primary);
+}
+
+body.dark-mode {
+  --primary: #4fc3f7; /* Lighter Blue for Dark Mode */
+  --primary-hover: #29b6f6;
+  --bg-color: #050505; /* Deep Black Background */
+  --text-primary: #ffffff; /* Pure White Text */
+  --text-secondary: #b0bec5;
+  
+  /* Much darker glass for premium look */
+  --glass-bg: rgba(20, 20, 20, 0.75); 
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+  
+  /* Dark Mode Components */
+  --item-bg: rgba(30, 30, 30, 0.6);
+  --item-bg-hover: rgba(50, 50, 50, 0.8);
+  --item-border: rgba(255, 255, 255, 0.05);
+  --message-bubble-bg: #1E1E1E;
+  --input-bg: #1E1E1E;
+}
+
+body.high-contrast {
+  --primary: #0000FF; /* Pure Blue */
+  --primary-hover: #0000CC;
+  --bg-color: #FFFFFF;
+  --text-primary: #000000;
+  --text-secondary: #000000;
+  
+  --glass-bg: #FFFFFF; /* No transparency */
+  --glass-border: #000000; /* Solid border */
+  --glass-shadow: none;
+  --glass-blur: 0px;
+  
+  --item-bg: #FFFFFF;
+  --item-bg-hover: #F0F0F0;
+  --item-border: #000000;
+  --message-bubble-bg: #FFFFFF;
+  --input-bg: #FFFFFF;
+}
+
+/* Combine Dark + High Contrast */
+body.dark-mode.high-contrast {
+  --primary: #FFFF00; /* Yellow on Black */
+  --primary-hover: #FFD700;
+  --bg-color: #000000;
+  --text-primary: #FFFFFF;
+  --text-secondary: #FFFFFF;
+  
+  --glass-bg: #000000;
+  --glass-border: #FFFFFF;
+  
+  --item-bg: #000000;
+  --item-bg-hover: #333333;
+  --item-border: #FFFFFF;
+  --message-bubble-bg: #000000;
+  --input-bg: #000000;
+  --tab-active-text: #000000; /* Black text on white active tab */
+}
+
+html,
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--text-primary);
+  /* Font is set via layout.tsx (Outfit), fallback here */
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  
+  /* Clean Professional Background */
+  background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(144, 202, 249, 0.2) 0, transparent 50%), 
+    radial-gradient(at 100% 100%, rgba(2, 136, 209, 0.1) 0, transparent 50%);
+  
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Custom Scrollbar for Webkit */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
