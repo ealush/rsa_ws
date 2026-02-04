@@ -17,35 +17,20 @@ type Messages = Message[];
 
 interface PagerProps {
   contactId: number;
+  initialMessages: Messages;
 }
 
-export default function Pager({ contactId }: PagerProps) {
-  const [messages, setMessages] = useState<Messages>([]);
-  const [, formAction, isPending] = useActionState(send, null);
-
-  async function send(_: unknown, formData: FormData) {
-    const message = await sendMessage(formData);
-
-    setMessages((prev) => [message, ...prev] as Messages);
-  }
-
-  const fetchMessages = useCallback(
-    async function fetchMessages() {
-      const response = await fetch(`/api/contacts/${contactId}/message`);
-
-      const data: Messages = await response.json();
-      setMessages(data);
-    },
-    [contactId],
+export default function Pager({ contactId, initialMessages }: PagerProps) {
+  const [messages, formAction, isPending] = useActionState(
+    send,
+    initialMessages,
   );
 
-  useEffect(() => {
-    if (contactId) {
-      fetchMessages();
-    } else {
-      setMessages([]);
-    }
-  }, [contactId, fetchMessages]);
+  async function send(prev: Messages, formData: FormData) {
+    const message = await sendMessage(formData);
+
+    return [message, ...prev];
+  }
 
   return (
     <div className={styles.pagerContainer}>
