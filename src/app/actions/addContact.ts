@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { prisma } from "../db/prismaClient";
 
 export async function addContact(formData: FormData) {
@@ -16,4 +17,6 @@ export async function addContact(formData: FormData) {
       email,
     },
   });
+
+  redirect("/");
 }

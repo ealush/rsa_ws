@@ -4,6 +4,7 @@ import PageLayout, { Content, Header } from "./PageLayout";
 import Link from "next/link";
 import { Submit } from "./Submit";
 import { addContact } from "../actions/addContact";
+import { updateContact } from "../actions/updateContact";
 
 type ContactFormProps = {
   initialData?: {
@@ -21,7 +22,12 @@ export default function ContactForm({ initialData, title }: ContactFormProps) {
     <PageLayout>
       <Header title={title} />
       <Content>
-        <form className={styles.form} id="contact-form" action={addContact}>
+        <form
+          className={styles.form}
+          id="contact-form"
+          action={initialData?.id ? updateContact : addContact}
+        >
+          <input type="hidden" name="id" value={initialData?.id} />
           <div className={styles.formContent}>
             <FormInput
               label="First Name"
