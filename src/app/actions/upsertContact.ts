@@ -1,8 +1,11 @@
 "use server";
 import { redirect } from "next/navigation";
 import { prisma } from "../db/prismaClient";
+import { setTimeout } from "node:timers/promises";
 
 export async function upsertContact(formData: FormData) {
+  await setTimeout(1500);
+
   const data = {
     firstName: formData.get("firstName") as string,
     lastName: formData.get("lastName") as string,
