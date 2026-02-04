@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useActionState } from "react";
+import React, { useActionState, useOptimistic } from "react";
 import styles from "./pager.module.css";
 
 import clsx from "clsx";
@@ -11,6 +11,7 @@ interface Message {
   content: string;
   timestamp: string;
   contactId: number;
+  optimistic?: boolean;
 }
 
 type Messages = Message[];
@@ -25,8 +26,22 @@ export default function Pager({ contactId, initialMessages }: PagerProps) {
     send,
     initialMessages,
   );
+  const [optimisticMessages, addOptimisticMessage] = useOptimistic(
+    messages,
+    (prev: Messages, newMessage: Message) => {
+      return [newMessage, ...prev];
+    },
+  );
 
   async function send(prev: Messages, formData: FormData) {
+    addOptimisticMessage({
+      id: Date.now(),
+      content: formData.get("content") as string,
+      contactId: contactId,
+      timestamp: new Date().toISOString(),
+      optimistic: true,
+    });
+
     const message = await sendMessage(formData);
 
     return [message, ...prev];
@@ -37,7 +52,7 @@ export default function Pager({ contactId, initialMessages }: PagerProps) {
       <h3>📟 Pager</h3>
 
       <div className={styles.messageList}>
-        {messages.map((msg) => (
+        {optimisticMessages.map((msg) => (
           <MessageItem key={msg.id} msg={msg} />
         ))}
       </div>
@@ -68,10 +83,12 @@ function MessageItem({ msg }: { msg: Message }) {
   };
 
   return (
-    <div className={clsx(styles.messageItem)}>
+    <div
+      className={clsx(styles.messageItem, msg.optimistic && styles.optimistic)}
+    >
       <p className={styles.messageContent}>{msg.content}</p>
       <span className={styles.messageTimestamp}>
-        {formatTimestamp(msg.timestamp)}
+        {msg.optimistic ? "Just now" : formatTimestamp(msg.timestamp)}
       </span>
     </div>
   );
