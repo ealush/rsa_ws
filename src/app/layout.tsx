@@ -1,25 +1,19 @@
-import type { Metadata } from 'next'
-import { Outfit } from 'next/font/google'
-import './globals.css'
-
-
-const outfit = Outfit({ subsets: ['latin'] })
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'Contacts App',
-  description: 'A simple contacts management application',
-}
+  title: "ChronoTrips™ Portal",
+  description: "Bureaucratic sci-fi time machine rental wizard.",
+};
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body className={outfit.className}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
-  )
+  );
 }

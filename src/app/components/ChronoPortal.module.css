@@ -1,0 +1,157 @@
+.viewport {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.card {
+  width: min(760px, 100%);
+  border: 1px solid #00eeff;
+  background: linear-gradient(180deg, rgba(0, 10, 24, 0.95), rgba(0, 7, 16, 0.96));
+  box-shadow:
+    0 0 0 1px rgba(0, 238, 255, 0.22),
+    0 0 22px rgba(0, 238, 255, 0.3),
+    inset 0 0 36px rgba(0, 132, 255, 0.1);
+  border-radius: 2px;
+  padding: 1.8rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.eyebrow {
+  color: #ffbf1f;
+  font-size: 1.7rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.45rem;
+}
+
+.card h1 {
+  color: #2ae9ff;
+  margin-bottom: 0.7rem;
+  font-size: clamp(1.7rem, 2.4vw, 3.1rem);
+  letter-spacing: 0.02em;
+}
+
+.fieldLabel {
+  display: grid;
+  gap: 0.45rem;
+  color: #d8f4ff;
+  font-size: clamp(1.05rem, 1.2vw, 1.8rem);
+}
+
+.fieldLabel input,
+.fieldLabel textarea {
+  width: 100%;
+  border: 1px solid #00eeff;
+  border-radius: 0;
+  background: rgba(0, 3, 8, 0.86);
+  color: #ddfbff;
+  padding: 0.72rem 0.82rem;
+  font: inherit;
+}
+
+.fieldLabel textarea {
+  min-height: 120px;
+}
+
+.fieldLabel input:focus,
+.fieldLabel textarea:focus {
+  outline: none;
+  border-color: #29f5ff;
+  box-shadow: 0 0 12px rgba(0, 238, 255, 0.5);
+}
+
+.errorText {
+  color: #ff6c65;
+  min-height: 1.2rem;
+  font-size: 1.35rem;
+  margin-top: 0.05rem;
+}
+
+.inlineLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.statusIndicator {
+  color: #24ffcb;
+  font-size: 1.25rem;
+}
+
+.fluxText {
+  color: #ffbf1f;
+  margin: 0.95rem 0 0.95rem;
+  font-size: 1.6rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 0.45rem;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  border-radius: 0;
+  padding: 0.78rem 1.15rem;
+  border: 1px solid #00eeff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.8rem;
+  min-width: 176px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.primaryBtn {
+  background: rgba(0, 74, 112, 0.45);
+  color: #d7fbff;
+  box-shadow: 0 0 14px rgba(0, 238, 255, 0.27);
+}
+
+.primaryBtn:hover,
+.secondaryBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px rgba(0, 238, 255, 0.36);
+}
+
+.primaryBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.secondaryBtn {
+  background: rgba(0, 20, 30, 0.7);
+  color: #d8feff;
+}
+
+.successCopy {
+  color: #d8feff;
+  margin: 0.3rem 0 1.05rem;
+  font-size: 1.45rem;
+}
+
+@media (max-width: 900px) {
+  .eyebrow {
+    font-size: 1rem;
+  }
+
+  .errorText,
+  .statusIndicator,
+  .fluxText,
+  .primaryBtn,
+  .secondaryBtn,
+  .fieldLabel {
+    font-size: 1rem;
+  }
+
+  .card {
+    padding: 1.2rem;
+  }
+}
