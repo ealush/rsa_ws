@@ -268,7 +268,18 @@
   box-shadow: 0 0 10px rgba(0, 238, 255, 0.3);
 }
 
-/* ── Responsive ──────────────────────────────────── */
+/* ── Congestion indicator ─────────────────────────── */
+
+.congestion {
+  font-size: 1.35rem;
+  letter-spacing: 0.03em;
+}
+
+.congestionCLEAR    { color: #24ffcb; }
+.congestionLIGHT    { color: #2ae9ff; }
+.congestionMODERATE { color: #ffbf1f; }
+.congestionHEAVY    { color: #ff8080; }
+
 
 @media (max-width: 600px) {
   .navBrand {

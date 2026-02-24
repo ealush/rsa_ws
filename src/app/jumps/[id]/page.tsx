@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { prisma } from "@/app/db/prismaClient";
+import { genYearCongestion } from "@/app/utils";
 import styles from "../jumps.module.css";
 
 type Props = { params: Promise<{ id: string }> };
@@ -23,6 +24,7 @@ export default async function JumpDetailPage({ params }: Props) {
   if (!jump) notFound();
 
   const isParadox = jump.birthYear >= jump.destinationYear;
+  const congestion = genYearCongestion(jump.destinationYear);
 
   const filed = new Date(jump.createdAt).toLocaleString("en-GB", {
     day: "2-digit",
@@ -91,6 +93,13 @@ export default async function JumpDetailPage({ params }: Props) {
               }`}
             >
               {isParadox ? "⚠ PARADOX FLAGGED" : "✓ TIMELINE SAFE"}
+            </span>
+          </div>
+
+          <div className={styles.field}>
+            <span className={styles.fieldLabel}>Temporal Traffic · {jump.destinationYear}</span>
+            <span className={`${styles.congestion} ${styles[`congestion${congestion.level}`]}`}>
+              {congestion.icon} {congestion.label}
             </span>
           </div>
         </div>
