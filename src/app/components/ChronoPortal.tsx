@@ -1,14 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import styles from "./ChronoPortal.module.css";
-import { calculateQuantumFlux, checkTimelineDatabase } from "@/app/utils";
+import { calculateQuantumFlux } from "@/app/utils";
 import StepOneMission from "./chrono-portal/StepOneMission";
 import StepTwoCalibration from "./chrono-portal/StepTwoCalibration";
 import StepThreeSuccess from "./chrono-portal/StepThreeSuccess";
 import {
   ChronoFormData,
-  ChronoFormErrors,
   INITIAL_CHRONO_FORM,
   ChronoStep,
 } from "./chrono-portal/types";
@@ -16,9 +15,7 @@ import {
 export default function ChronoPortal() {
   const [currentStep, setCurrentStep] = useState<ChronoStep>(1);
   const [formData, setFormData] = useState<ChronoFormData>(INITIAL_CHRONO_FORM);
-  const [errors, setErrors] = useState<ChronoFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isCheckingTimeline, setIsCheckingTimeline] = useState(false);
 
   const flux = useMemo(() => {
     const year = Number(formData.destinationYear);
@@ -28,55 +25,11 @@ export default function ChronoPortal() {
     return calculateQuantumFlux(year);
   }, [formData.destinationYear]);
 
-  useEffect(() => {
-    if (currentStep !== 2) {
-      return;
-    }
-
-    const year = Number(formData.destinationYear);
-    if (!Number.isFinite(year) || formData.destinationYear === "") {
-      setIsCheckingTimeline(false);
-      return;
-    }
-
-    const controller = new AbortController();
-    setIsCheckingTimeline(true);
-
-    checkTimelineDatabase(formData.travelerName, year, controller.signal)
-      .then((hasParadox) => {
-        setErrors((prev) => ({
-          ...prev,
-          destinationYear: hasParadox
-            ? "Paradox alert: this year intersects with your identity trail."
-            : "",
-        }));
-      })
-      .catch((error: unknown) => {
-        if (error instanceof DOMException && error.name === "AbortError") {
-          return;
-        }
-        setErrors((prev) => ({
-          ...prev,
-          destinationYear: "Timeline scanner temporarily unavailable.",
-        }));
-      })
-      .finally(() => {
-        setIsCheckingTimeline(false);
-      });
-
-    return () => controller.abort();
-  }, [currentStep, formData.destinationYear, formData.travelerName]);
-
   const updateField = (key: keyof ChronoFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
-    setErrors((prev) => ({ ...prev, [key]: "" }));
   };
 
   const handleInitiateJump = async () => {
-    if (isCheckingTimeline || errors.destinationYear) {
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -85,31 +38,18 @@ export default function ChronoPortal() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          birthYear: Number(formData.birthYear),
           destinationYear: Number(formData.destinationYear),
           plutoniumCores: Number(formData.plutoniumCores),
         }),
       });
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        const apiErrors = result?.errors ?? {};
-        setErrors((prev) => ({
-          ...prev,
-          destinationYear: apiErrors.destinationYear?.[0] ?? prev.destinationYear,
-        }));
+      if (response.ok) {
+        setCurrentStep(3);
+      } else {
         setCurrentStep(2);
-        return;
       }
-
-      setCurrentStep(3);
     } catch {
-      setErrors((prev) => ({
-        ...prev,
-        destinationYear:
-          prev.destinationYear ||
-          "Network instability detected. Please retry INITIATE JUMP.",
-      }));
       setCurrentStep(2);
     } finally {
       setIsSubmitting(false);
@@ -118,10 +58,8 @@ export default function ChronoPortal() {
 
   const handleReset = () => {
     setFormData(INITIAL_CHRONO_FORM);
-    setErrors({});
     setCurrentStep(1);
     setIsSubmitting(false);
-    setIsCheckingTimeline(false);
   };
 
   return (
@@ -134,7 +72,7 @@ export default function ChronoPortal() {
         {currentStep === 1 && (
           <StepOneMission
             formData={formData}
-            errors={errors}
+            errors={{}}
             onChange={updateField}
             onNext={() => setCurrentStep(2)}
           />
@@ -143,10 +81,10 @@ export default function ChronoPortal() {
         {currentStep === 2 && (
           <StepTwoCalibration
             formData={formData}
-            errors={errors}
+            errors={{}}
             flux={flux}
             isSubmitting={isSubmitting}
-            isCheckingTimeline={isCheckingTimeline}
+            isCheckingTimeline={false}
             onChange={updateField}
             onBack={() => setCurrentStep(1)}
             onSubmit={handleInitiateJump}

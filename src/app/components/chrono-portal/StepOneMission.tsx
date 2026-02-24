@@ -33,6 +33,19 @@ export default function StepOneMission({
       />
 
       <FieldControl
+        label="Year of Birth"
+        input={
+          <input
+            type="number"
+            value={formData.birthYear}
+            placeholder="YYYY"
+            onChange={(event) => onChange("birthYear", event.target.value)}
+          />
+        }
+        error={errors.birthYear}
+      />
+
+      <FieldControl
         label="Mission Objective"
         input={
           <textarea

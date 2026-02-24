@@ -882,11 +882,13 @@ export namespace Prisma {
   }
 
   export type JumpRequestAvgAggregateOutputType = {
+    birthYear: number | null
     destinationYear: number | null
     plutoniumCores: number | null
   }
 
   export type JumpRequestSumAggregateOutputType = {
+    birthYear: number | null
     destinationYear: number | null
     plutoniumCores: number | null
   }
@@ -895,6 +897,7 @@ export namespace Prisma {
     id: string | null
     travelerName: string | null
     mission: string | null
+    birthYear: number | null
     destinationYear: number | null
     plutoniumCores: number | null
     createdAt: Date | null
@@ -904,6 +907,7 @@ export namespace Prisma {
     id: string | null
     travelerName: string | null
     mission: string | null
+    birthYear: number | null
     destinationYear: number | null
     plutoniumCores: number | null
     createdAt: Date | null
@@ -913,6 +917,7 @@ export namespace Prisma {
     id: number
     travelerName: number
     mission: number
+    birthYear: number
     destinationYear: number
     plutoniumCores: number
     createdAt: number
@@ -921,11 +926,13 @@ export namespace Prisma {
 
 
   export type JumpRequestAvgAggregateInputType = {
+    birthYear?: true
     destinationYear?: true
     plutoniumCores?: true
   }
 
   export type JumpRequestSumAggregateInputType = {
+    birthYear?: true
     destinationYear?: true
     plutoniumCores?: true
   }
@@ -934,6 +941,7 @@ export namespace Prisma {
     id?: true
     travelerName?: true
     mission?: true
+    birthYear?: true
     destinationYear?: true
     plutoniumCores?: true
     createdAt?: true
@@ -943,6 +951,7 @@ export namespace Prisma {
     id?: true
     travelerName?: true
     mission?: true
+    birthYear?: true
     destinationYear?: true
     plutoniumCores?: true
     createdAt?: true
@@ -952,6 +961,7 @@ export namespace Prisma {
     id?: true
     travelerName?: true
     mission?: true
+    birthYear?: true
     destinationYear?: true
     plutoniumCores?: true
     createdAt?: true
@@ -1048,6 +1058,7 @@ export namespace Prisma {
     id: string
     travelerName: string
     mission: string
+    birthYear: number
     destinationYear: number
     plutoniumCores: number
     createdAt: Date
@@ -1076,6 +1087,7 @@ export namespace Prisma {
     id?: boolean
     travelerName?: boolean
     mission?: boolean
+    birthYear?: boolean
     destinationYear?: boolean
     plutoniumCores?: boolean
     createdAt?: boolean
@@ -1085,6 +1097,7 @@ export namespace Prisma {
     id?: boolean
     travelerName?: boolean
     mission?: boolean
+    birthYear?: boolean
     destinationYear?: boolean
     plutoniumCores?: boolean
     createdAt?: boolean
@@ -1094,6 +1107,7 @@ export namespace Prisma {
     id?: boolean
     travelerName?: boolean
     mission?: boolean
+    birthYear?: boolean
     destinationYear?: boolean
     plutoniumCores?: boolean
     createdAt?: boolean
@@ -1103,12 +1117,13 @@ export namespace Prisma {
     id?: boolean
     travelerName?: boolean
     mission?: boolean
+    birthYear?: boolean
     destinationYear?: boolean
     plutoniumCores?: boolean
     createdAt?: boolean
   }
 
-  export type JumpRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "travelerName" | "mission" | "destinationYear" | "plutoniumCores" | "createdAt", ExtArgs["result"]["jumpRequest"]>
+  export type JumpRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "travelerName" | "mission" | "birthYear" | "destinationYear" | "plutoniumCores" | "createdAt", ExtArgs["result"]["jumpRequest"]>
 
   export type $JumpRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "JumpRequest"
@@ -1117,6 +1132,7 @@ export namespace Prisma {
       id: string
       travelerName: string
       mission: string
+      birthYear: number
       destinationYear: number
       plutoniumCores: number
       createdAt: Date
@@ -1546,6 +1562,7 @@ export namespace Prisma {
     readonly id: FieldRef<"JumpRequest", 'String'>
     readonly travelerName: FieldRef<"JumpRequest", 'String'>
     readonly mission: FieldRef<"JumpRequest", 'String'>
+    readonly birthYear: FieldRef<"JumpRequest", 'Int'>
     readonly destinationYear: FieldRef<"JumpRequest", 'Int'>
     readonly plutoniumCores: FieldRef<"JumpRequest", 'Int'>
     readonly createdAt: FieldRef<"JumpRequest", 'DateTime'>
@@ -1928,6 +1945,7 @@ export namespace Prisma {
     id: 'id',
     travelerName: 'travelerName',
     mission: 'mission',
+    birthYear: 'birthYear',
     destinationYear: 'destinationYear',
     plutoniumCores: 'plutoniumCores',
     createdAt: 'createdAt'
@@ -1987,6 +2005,7 @@ export namespace Prisma {
     id?: StringFilter<"JumpRequest"> | string
     travelerName?: StringFilter<"JumpRequest"> | string
     mission?: StringFilter<"JumpRequest"> | string
+    birthYear?: IntFilter<"JumpRequest"> | number
     destinationYear?: IntFilter<"JumpRequest"> | number
     plutoniumCores?: IntFilter<"JumpRequest"> | number
     createdAt?: DateTimeFilter<"JumpRequest"> | Date | string
@@ -1996,6 +2015,7 @@ export namespace Prisma {
     id?: SortOrder
     travelerName?: SortOrder
     mission?: SortOrder
+    birthYear?: SortOrder
     destinationYear?: SortOrder
     plutoniumCores?: SortOrder
     createdAt?: SortOrder
@@ -2008,6 +2028,7 @@ export namespace Prisma {
     NOT?: JumpRequestWhereInput | JumpRequestWhereInput[]
     travelerName?: StringFilter<"JumpRequest"> | string
     mission?: StringFilter<"JumpRequest"> | string
+    birthYear?: IntFilter<"JumpRequest"> | number
     destinationYear?: IntFilter<"JumpRequest"> | number
     plutoniumCores?: IntFilter<"JumpRequest"> | number
     createdAt?: DateTimeFilter<"JumpRequest"> | Date | string
@@ -2017,6 +2038,7 @@ export namespace Prisma {
     id?: SortOrder
     travelerName?: SortOrder
     mission?: SortOrder
+    birthYear?: SortOrder
     destinationYear?: SortOrder
     plutoniumCores?: SortOrder
     createdAt?: SortOrder
@@ -2034,6 +2056,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"JumpRequest"> | string
     travelerName?: StringWithAggregatesFilter<"JumpRequest"> | string
     mission?: StringWithAggregatesFilter<"JumpRequest"> | string
+    birthYear?: IntWithAggregatesFilter<"JumpRequest"> | number
     destinationYear?: IntWithAggregatesFilter<"JumpRequest"> | number
     plutoniumCores?: IntWithAggregatesFilter<"JumpRequest"> | number
     createdAt?: DateTimeWithAggregatesFilter<"JumpRequest"> | Date | string
@@ -2043,6 +2066,7 @@ export namespace Prisma {
     id?: string
     travelerName: string
     mission: string
+    birthYear?: number
     destinationYear: number
     plutoniumCores: number
     createdAt?: Date | string
@@ -2052,6 +2076,7 @@ export namespace Prisma {
     id?: string
     travelerName: string
     mission: string
+    birthYear?: number
     destinationYear: number
     plutoniumCores: number
     createdAt?: Date | string
@@ -2061,6 +2086,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     travelerName?: StringFieldUpdateOperationsInput | string
     mission?: StringFieldUpdateOperationsInput | string
+    birthYear?: IntFieldUpdateOperationsInput | number
     destinationYear?: IntFieldUpdateOperationsInput | number
     plutoniumCores?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2070,6 +2096,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     travelerName?: StringFieldUpdateOperationsInput | string
     mission?: StringFieldUpdateOperationsInput | string
+    birthYear?: IntFieldUpdateOperationsInput | number
     destinationYear?: IntFieldUpdateOperationsInput | number
     plutoniumCores?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2079,6 +2106,7 @@ export namespace Prisma {
     id?: string
     travelerName: string
     mission: string
+    birthYear?: number
     destinationYear: number
     plutoniumCores: number
     createdAt?: Date | string
@@ -2088,6 +2116,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     travelerName?: StringFieldUpdateOperationsInput | string
     mission?: StringFieldUpdateOperationsInput | string
+    birthYear?: IntFieldUpdateOperationsInput | number
     destinationYear?: IntFieldUpdateOperationsInput | number
     plutoniumCores?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2097,6 +2126,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     travelerName?: StringFieldUpdateOperationsInput | string
     mission?: StringFieldUpdateOperationsInput | string
+    birthYear?: IntFieldUpdateOperationsInput | number
     destinationYear?: IntFieldUpdateOperationsInput | number
     plutoniumCores?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2142,12 +2172,14 @@ export namespace Prisma {
     id?: SortOrder
     travelerName?: SortOrder
     mission?: SortOrder
+    birthYear?: SortOrder
     destinationYear?: SortOrder
     plutoniumCores?: SortOrder
     createdAt?: SortOrder
   }
 
   export type JumpRequestAvgOrderByAggregateInput = {
+    birthYear?: SortOrder
     destinationYear?: SortOrder
     plutoniumCores?: SortOrder
   }
@@ -2156,6 +2188,7 @@ export namespace Prisma {
     id?: SortOrder
     travelerName?: SortOrder
     mission?: SortOrder
+    birthYear?: SortOrder
     destinationYear?: SortOrder
     plutoniumCores?: SortOrder
     createdAt?: SortOrder
@@ -2165,12 +2198,14 @@ export namespace Prisma {
     id?: SortOrder
     travelerName?: SortOrder
     mission?: SortOrder
+    birthYear?: SortOrder
     destinationYear?: SortOrder
     plutoniumCores?: SortOrder
     createdAt?: SortOrder
   }
 
   export type JumpRequestSumOrderByAggregateInput = {
+    birthYear?: SortOrder
     destinationYear?: SortOrder
     plutoniumCores?: SortOrder
   }

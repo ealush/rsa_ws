@@ -118,6 +118,7 @@ exports.Prisma.JumpRequestScalarFieldEnum = {
   id: 'id',
   travelerName: 'travelerName',
   mission: 'mission',
+  birthYear: 'birthYear',
   destinationYear: 'destinationYear',
   plutoniumCores: 'plutoniumCores',
   createdAt: 'createdAt'
