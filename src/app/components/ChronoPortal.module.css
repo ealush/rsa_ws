@@ -20,11 +20,34 @@
   gap: 0.4rem;
 }
 
+.cardNav {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.45rem;
+}
+
 .eyebrow {
   color: #ffbf1f;
   font-size: 1.7rem;
   letter-spacing: 0.02em;
-  margin-bottom: 0.45rem;
+}
+
+.registryLink {
+  color: #2ae9ff;
+  text-decoration: none;
+  font-size: 1.35rem;
+  border: 1px solid rgba(0, 238, 255, 0.35);
+  padding: 0.3rem 0.75rem;
+  white-space: nowrap;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.registryLink:hover {
+  border-color: #00eeff;
+  box-shadow: 0 0 10px rgba(0, 238, 255, 0.3);
 }
 
 .card h1 {

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "../ChronoPortal.module.css";
 
 type StepThreeSuccessProps = {
@@ -12,9 +13,14 @@ export default function StepThreeSuccess({ onReset }: StepThreeSuccessProps) {
         Your temporal itinerary has been stamped by the Bureau of Chronological
         Transit.
       </p>
-      <button type="button" className={styles.primaryBtn} onClick={onReset}>
-        Book Another Jump
-      </button>
+      <div className={styles.actions}>
+        <button type="button" className={styles.secondaryBtn} onClick={onReset}>
+          Book Another Jump
+        </button>
+        <Link href="/jumps" className={styles.primaryBtn}>
+          View Jump Registry →
+        </Link>
+      </div>
     </>
   );
 }

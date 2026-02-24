@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import styles from "./ChronoPortal.module.css";
 import { calculateQuantumFlux } from "@/app/utils";
@@ -65,9 +66,14 @@ export default function ChronoPortal() {
   return (
     <main className={styles.viewport}>
       <section className={styles.card}>
-        <p className={styles.eyebrow}>
-          ChronoTrips™ Portal · Temporal Authority Form JT-88
-        </p>
+        <div className={styles.cardNav}>
+          <p className={styles.eyebrow}>
+            ChronoTrips™ Portal · Temporal Authority Form JT-88
+          </p>
+          <Link href="/jumps" className={styles.registryLink}>
+            Jump Registry →
+          </Link>
+        </div>
 
         {currentStep === 1 && (
           <StepOneMission
