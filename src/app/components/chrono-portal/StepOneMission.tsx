@@ -1,17 +1,16 @@
+import { ChronosSchemaType } from "@/app/validation/chronoVestSuite";
 import styles from "../ChronoPortal.module.css";
 import FieldControl from "./FieldControl";
-import { ChronoFormData, ChronoFormErrors } from "./types";
+import { ChronoFormErrors } from "./types";
 
 type StepOneMissionProps = {
-  formData: ChronoFormData;
-  errors: ChronoFormErrors;
-  onChange: (key: keyof ChronoFormData, value: string) => void;
+  formData: ChronosSchemaType;
+  onChange: (key: keyof ChronosSchemaType, value: string) => void;
   onNext: () => void;
 };
 
 export default function StepOneMission({
   formData,
-  errors,
   onChange,
   onNext,
 }: StepOneMissionProps) {
@@ -29,7 +28,7 @@ export default function StepOneMission({
             onChange={(event) => onChange("travelerName", event.target.value)}
           />
         }
-        error={errors.travelerName}
+        name="travelerName"
       />
 
       <FieldControl
@@ -42,7 +41,7 @@ export default function StepOneMission({
             onChange={(event) => onChange("birthYear", event.target.value)}
           />
         }
-        error={errors.birthYear}
+        name="birthYear"
       />
 
       <FieldControl
@@ -55,7 +54,7 @@ export default function StepOneMission({
             onChange={(event) => onChange("mission", event.target.value)}
           />
         }
-        error={errors.mission}
+        name="mission"
       />
 
       <button type="button" className={styles.primaryBtn} onClick={onNext}>

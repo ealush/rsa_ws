@@ -4,7 +4,13 @@ import { prisma } from "@/app/db/prismaClient";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { travelerName, mission, birthYear, destinationYear, plutoniumCores } = body;
+    const {
+      travelerName,
+      mission,
+      birthYear,
+      destinationYear,
+      plutoniumCores,
+    } = body;
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
 

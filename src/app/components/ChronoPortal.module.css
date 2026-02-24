@@ -9,7 +9,11 @@
 .card {
   width: min(760px, 100%);
   border: 1px solid #00eeff;
-  background: linear-gradient(180deg, rgba(0, 10, 24, 0.95), rgba(0, 7, 16, 0.96));
+  background: linear-gradient(
+    180deg,
+    rgba(0, 10, 24, 0.95),
+    rgba(0, 7, 16, 0.96)
+  );
   box-shadow:
     0 0 0 1px rgba(0, 238, 255, 0.22),
     0 0 22px rgba(0, 238, 255, 0.3),
@@ -42,7 +46,9 @@
   border: 1px solid rgba(0, 238, 255, 0.35);
   padding: 0.3rem 0.75rem;
   white-space: nowrap;
-  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .registryLink:hover {
@@ -86,11 +92,18 @@
   box-shadow: 0 0 12px rgba(0, 238, 255, 0.5);
 }
 
-.errorText {
-  color: #ff6c65;
+.errorText,
+.warningText {
   min-height: 1.2rem;
   font-size: 1.35rem;
   margin-top: 0.05rem;
+}
+
+.warningText {
+  color: #ffbf1f;
+}
+.errorText {
+  color: #ff6c65;
 }
 
 .inlineLabel {
@@ -127,7 +140,9 @@
   font: inherit;
   font-size: 1.8rem;
   min-width: 176px;
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
 }
 
 .primaryBtn {
@@ -158,6 +173,54 @@
   color: #d8feff;
   margin: 0.3rem 0 1.05rem;
   font-size: 1.45rem;
+}
+
+/* ── Pending / async spinner ─────────────────────── */
+
+.inputWrapper {
+  position: relative;
+  display: grid;
+}
+
+.pendingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.45rem;
+}
+
+.spinnerRing {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 238, 255, 0.15);
+  border-top-color: #2ae9ff;
+  animation: chronoSpin 0.8s linear infinite;
+  box-shadow: 0 0 8px rgba(0, 238, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.pendingLabel {
+  color: #2ae9ff;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  animation: chronoPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes chronoSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes chronoPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 900px) {

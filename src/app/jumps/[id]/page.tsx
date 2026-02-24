@@ -36,7 +36,6 @@ export default async function JumpDetailPage({ params }: Props) {
 
   return (
     <main className={styles.viewport}>
-
       {/* ── Nav ── */}
       <nav className={styles.nav}>
         <Link href="/" className={styles.navBrand}>
@@ -58,16 +57,18 @@ export default async function JumpDetailPage({ params }: Props) {
         {/* Paradox warning */}
         {isParadox && (
           <div className={styles.paradoxAlert}>
-            ⚠ TIME PARADOX DETECTED — Destination year ({jump.destinationYear}) predates or
-            coincides with traveler birth year ({jump.birthYear}). Bureau of Chronological
-            Transit is reviewing this filing.
+            ⚠ TIME PARADOX DETECTED — Destination year ({jump.destinationYear})
+            predates or coincides with traveler birth year ({jump.birthYear}).
+            Bureau of Chronological Transit is reviewing this filing.
           </div>
         )}
 
         <div className={styles.fields}>
           <div className={styles.field}>
             <span className={styles.fieldLabel}>Destination Year</span>
-            <span className={styles.fieldValueAccent}>{jump.destinationYear}</span>
+            <span className={styles.fieldValueAccent}>
+              {jump.destinationYear}
+            </span>
           </div>
 
           <div className={styles.field}>
@@ -97,8 +98,12 @@ export default async function JumpDetailPage({ params }: Props) {
           </div>
 
           <div className={styles.field}>
-            <span className={styles.fieldLabel}>Temporal Traffic · {jump.destinationYear}</span>
-            <span className={`${styles.congestion} ${styles[`congestion${congestion.level}`]}`}>
+            <span className={styles.fieldLabel}>
+              Temporal Traffic · {jump.destinationYear}
+            </span>
+            <span
+              className={`${styles.congestion} ${styles[`congestion${congestion.level}`]}`}
+            >
               {congestion.icon} {congestion.label}
             </span>
           </div>
@@ -108,7 +113,6 @@ export default async function JumpDetailPage({ params }: Props) {
           ← Back to Registry
         </Link>
       </article>
-
     </main>
   );
 }

@@ -17,7 +17,6 @@ export default async function JumpsPage() {
 
   return (
     <main className={styles.viewport}>
-
       {/* ── Nav ── */}
       <nav className={styles.nav}>
         <Link href="/" className={styles.navBrand}>
@@ -56,7 +55,9 @@ export default async function JumpsPage() {
               href={`/jumps/${jump.id}`}
               className={styles.card}
             >
-              <span className={styles.cardId}>#{jump.id.slice(-8).toUpperCase()}</span>
+              <span className={styles.cardId}>
+                #{jump.id.slice(-8).toUpperCase()}
+              </span>
               <span className={styles.cardName}>{jump.travelerName}</span>
               <span className={styles.cardYear}>→ {jump.destinationYear}</span>
               <p className={styles.cardMission}>{jump.mission}</p>
@@ -74,7 +75,6 @@ export default async function JumpsPage() {
           );
         })}
       </section>
-
     </main>
   );
 }

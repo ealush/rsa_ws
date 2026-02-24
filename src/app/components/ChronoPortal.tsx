@@ -7,15 +7,16 @@ import { calculateQuantumFlux } from "@/app/utils";
 import StepOneMission from "./chrono-portal/StepOneMission";
 import StepTwoCalibration from "./chrono-portal/StepTwoCalibration";
 import StepThreeSuccess from "./chrono-portal/StepThreeSuccess";
+import { INITIAL_CHRONO_FORM, ChronoStep } from "./chrono-portal/types";
 import {
-  ChronoFormData,
-  INITIAL_CHRONO_FORM,
-  ChronoStep,
-} from "./chrono-portal/types";
+  ChronosSchemaType,
+  chronoVestSuite,
+} from "../validation/chronoVestSuite";
 
 export default function ChronoPortal() {
   const [currentStep, setCurrentStep] = useState<ChronoStep>(1);
-  const [formData, setFormData] = useState<ChronoFormData>(INITIAL_CHRONO_FORM);
+  const [formData, setFormData] =
+    useState<ChronosSchemaType>(INITIAL_CHRONO_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const flux = useMemo(() => {
@@ -26,8 +27,18 @@ export default function ChronoPortal() {
     return calculateQuantumFlux(year);
   }, [formData.destinationYear]);
 
-  const updateField = (key: keyof ChronoFormData, value: string) => {
-    setFormData((prev) => ({ ...prev, [key]: value }));
+  const updateField = (key: keyof ChronosSchemaType, value: string) => {
+    const nextState = {
+      ...formData,
+      [key]: value,
+    };
+
+    const res = chronoVestSuite
+      .only(key)
+      .afterEach(() => {
+        setFormData({ ...nextState });
+      })
+      .run(nextState);
   };
 
   const handleInitiateJump = async () => {
@@ -78,7 +89,6 @@ export default function ChronoPortal() {
         {currentStep === 1 && (
           <StepOneMission
             formData={formData}
-            errors={{}}
             onChange={updateField}
             onNext={() => setCurrentStep(2)}
           />
@@ -87,7 +97,6 @@ export default function ChronoPortal() {
         {currentStep === 2 && (
           <StepTwoCalibration
             formData={formData}
-            errors={{}}
             flux={flux}
             isSubmitting={isSubmitting}
             isCheckingTimeline={false}

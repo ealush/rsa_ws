@@ -275,11 +275,22 @@
   letter-spacing: 0.03em;
 }
 
-.congestionCLEAR    { color: #24ffcb; }
-.congestionLIGHT    { color: #2ae9ff; }
-.congestionMODERATE { color: #ffbf1f; }
-.congestionHEAVY    { color: #ff8080; }
+.congestionCLEAR {
+  color: #24ffcb;
+}
+.congestionLIGHT {
+  color: #2ae9ff;
+}
+.congestionMODERATE {
+  color: #ffbf1f;
+}
+.congestionHEAVY {
+  color: #ff8080;
+}
 
+.warning {
+  color: #ffbf1f;
+}
 
 @media (max-width: 600px) {
   .navBrand {

@@ -1,21 +1,19 @@
+import { ChronosSchemaType } from "@/app/validation/chronoVestSuite";
 import styles from "../ChronoPortal.module.css";
 import FieldControl from "./FieldControl";
-import { ChronoFormData, ChronoFormErrors } from "./types";
 
 type StepTwoCalibrationProps = {
-  formData: ChronoFormData;
-  errors: ChronoFormErrors;
+  formData: ChronosSchemaType;
   flux: number;
   isSubmitting: boolean;
   isCheckingTimeline: boolean;
-  onChange: (key: keyof ChronoFormData, value: string) => void;
+  onChange: (key: keyof ChronosSchemaType, value: string) => void;
   onBack: () => void;
   onSubmit: () => void;
 };
 
 export default function StepTwoCalibration({
   formData,
-  errors,
   flux,
   isSubmitting,
   isCheckingTimeline,
@@ -32,7 +30,9 @@ export default function StepTwoCalibration({
           <span className={styles.inlineLabel}>
             Target Year
             {isCheckingTimeline ? (
-              <span className={styles.statusIndicator}>Checking timeline...</span>
+              <span className={styles.statusIndicator}>
+                Checking timeline...
+              </span>
             ) : (
               <span className={styles.statusIndicator}>Timeline synced</span>
             )}
@@ -43,10 +43,12 @@ export default function StepTwoCalibration({
             type="number"
             value={formData.destinationYear}
             placeholder="YYYY"
-            onChange={(event) => onChange("destinationYear", event.target.value)}
+            onChange={(event) =>
+              onChange("destinationYear", event.target.value)
+            }
           />
         }
-        error={errors.destinationYear}
+        name="destinationYear"
       />
 
       <FieldControl
@@ -59,7 +61,7 @@ export default function StepTwoCalibration({
             onChange={(event) => onChange("plutoniumCores", event.target.value)}
           />
         }
-        error={errors.plutoniumCores}
+        name="plutoniumCores"
       />
 
       <p className={styles.fluxText}>Estimated Quantum Flux Load: {flux} GW</p>
