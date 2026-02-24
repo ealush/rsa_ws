@@ -114,30 +114,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.ContactScalarFieldEnum = {
+exports.Prisma.JumpRequestScalarFieldEnum = {
   id: 'id',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  middleName: 'middleName',
-  nickname: 'nickname',
-  phoneNumber: 'phoneNumber',
-  email: 'email',
-  address: 'address',
-  note: 'note',
-  description: 'description',
-  createdAt: 'createdAt',
-  mostRecentContactDate: 'mostRecentContactDate'
-};
-
-exports.Prisma.FavoriteContactScalarFieldEnum = {
-  contactId: 'contactId'
-};
-
-exports.Prisma.MessageScalarFieldEnum = {
-  id: 'id',
-  content: 'content',
-  timestamp: 'timestamp',
-  contactId: 'contactId'
+  travelerName: 'travelerName',
+  mission: 'mission',
+  destinationYear: 'destinationYear',
+  plutoniumCores: 'plutoniumCores',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -145,16 +128,9 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 
 exports.Prisma.ModelName = {
-  Contact: 'Contact',
-  FavoriteContact: 'FavoriteContact',
-  Message: 'Message'
+  JumpRequest: 'JumpRequest'
 };
 
 /**
