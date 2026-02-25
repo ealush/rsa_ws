@@ -41,7 +41,7 @@ export default async function JumpsPage() {
           </p>
         )}
 
-        {jumps.map((jump) => {
+        {jumps.map(function (jump) {
           const isParadox = jump.birthYear >= jump.destinationYear;
           const date = new Date(jump.createdAt).toLocaleDateString("en-GB", {
             day: "2-digit",

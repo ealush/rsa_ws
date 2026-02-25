@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       suppressParadoxCheck,
     } = body;
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise(function (resolve) { setTimeout(resolve, 1000); });
 
     await prisma.jumpRequest.create({
       data: {

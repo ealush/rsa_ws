@@ -1,13 +1,14 @@
+import { useMemo } from "react";
 import {
   ChronosSchemaType,
   chronoVestSuite,
 } from "@/app/validation/chronoVestSuite";
+import { calculateQuantumFlux } from "@/app/utils";
 import styles from "../ChronoPortal.module.css";
 import FieldControl from "./FieldControl";
 
 type StepTwoCalibrationProps = {
   formData: ChronosSchemaType;
-  flux: number;
   isSubmitting: boolean;
   isCheckingTimeline: boolean;
   onChange: (key: keyof ChronosSchemaType, value: string | boolean) => void;
@@ -17,13 +18,23 @@ type StepTwoCalibrationProps = {
 
 export default function StepTwoCalibration({
   formData,
-  flux,
   isSubmitting,
   isCheckingTimeline,
   onChange,
   onBack,
   onSubmit,
 }: StepTwoCalibrationProps) {
+  const flux = useMemo(
+    function () {
+      const year = Number(formData.destinationYear);
+      if (!Number.isFinite(year) || formData.destinationYear === "") {
+        return 0;
+      }
+      return calculateQuantumFlux(year);
+    },
+    [formData.destinationYear],
+  );
+
   return (
     <>
       <h1>Step 2: Spacetime Calibration</h1>
@@ -49,9 +60,9 @@ export default function StepTwoCalibration({
             type="number"
             value={formData.destinationYear}
             placeholder="YYYY"
-            onChange={(event) =>
-              onChange("destinationYear", event.target.value)
-            }
+            onChange={function (event) {
+              onChange("destinationYear", event.target.value);
+            }}
           />
         }
         name="destinationYear"
@@ -61,9 +72,9 @@ export default function StepTwoCalibration({
         <input
           type="checkbox"
           checked={!!formData.suppressParadoxCheck}
-          onChange={(event) =>
-            onChange("suppressParadoxCheck", event.target.checked)
-          }
+          onChange={function (event) {
+            onChange("suppressParadoxCheck", event.target.checked);
+          }}
         />
         Suppress Time Paradox Check
       </label>
@@ -75,7 +86,9 @@ export default function StepTwoCalibration({
             type="number"
             value={formData.plutoniumCores}
             placeholder="0"
-            onChange={(event) => onChange("plutoniumCores", event.target.value)}
+            onChange={function (event) {
+              onChange("plutoniumCores", event.target.value);
+            }}
           />
         }
         name="plutoniumCores"
@@ -90,9 +103,7 @@ export default function StepTwoCalibration({
         <button
           type="button"
           className={styles.primaryBtn}
-          disabled={
-            isSubmitting || isCheckingTimeline || !chronoVestSuite.isValid()
-          }
+          disabled={isSubmitting || isCheckingTimeline}
           onClick={onSubmit}
         >
           {isSubmitting ? "⏳ Initiating jump..." : "INITIATE JUMP"}

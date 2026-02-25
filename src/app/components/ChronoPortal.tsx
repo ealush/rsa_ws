@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import styles from "./ChronoPortal.module.css";
-import { calculateQuantumFlux } from "@/app/utils";
 import StepOneMission from "./chrono-portal/StepOneMission";
 import StepTwoCalibration from "./chrono-portal/StepTwoCalibration";
 import StepThreeSuccess from "./chrono-portal/StepThreeSuccess";
@@ -12,25 +11,32 @@ import {
   ChronosSchemaType,
   chronoVestSuite,
 } from "../validation/chronoVestSuite";
+import { initiateJump } from "../actions/jumpAction";
 
 export default function ChronoPortal() {
   const [currentStep, setCurrentStep] = useState<ChronoStep>(1);
   const [formData, setFormData] =
     useState<ChronosSchemaType>(INITIAL_CHRONO_FORM);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const flux = useMemo(() => {
-    const year = Number(formData.destinationYear);
-    if (!Number.isFinite(year) || formData.destinationYear === "") {
-      return 0;
-    }
-    return calculateQuantumFlux(year);
-  }, [formData.destinationYear]);
+  const [jumpState, dispatchJump, isPending] = useActionState(initiateJump, {
+    success: null,
+  });
 
-  const updateField = async (
+  useEffect(
+    function () {
+      if (jumpState.success === true) {
+        setCurrentStep(3);
+      } else if (jumpState.success === false) {
+        setCurrentStep(2);
+      }
+    },
+    [jumpState],
+  );
+
+  async function updateField(
     key: keyof ChronosSchemaType,
     value: string | boolean,
-  ) => {
+  ) {
     const nextState = {
       ...formData,
       [key]: value,
@@ -38,45 +44,27 @@ export default function ChronoPortal() {
 
     chronoVestSuite
       .only(key)
-      .afterEach(() => {
+      .afterEach(function () {
         setFormData({ ...nextState });
-        console.log(chronoVestSuite.get());
       })
       .run(nextState);
-  };
+  }
 
-  const handleInitiateJump = async () => {
-    setIsSubmitting(true);
+  function handleInitiateJump() {
+    dispatchJump({
+      travelerName: formData.travelerName,
+      mission: formData.mission,
+      birthYear: Number(formData.birthYear),
+      destinationYear: Number(formData.destinationYear),
+      plutoniumCores: Number(formData.plutoniumCores),
+      suppressParadoxCheck: Boolean(formData.suppressParadoxCheck),
+    });
+  }
 
-    try {
-      const response = await fetch("/api/jump", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          birthYear: Number(formData.birthYear),
-          destinationYear: Number(formData.destinationYear),
-          plutoniumCores: Number(formData.plutoniumCores),
-        }),
-      });
-
-      if (response.ok) {
-        setCurrentStep(3);
-      } else {
-        setCurrentStep(2);
-      }
-    } catch {
-      setCurrentStep(2);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleReset = () => {
+  function handleReset() {
     setFormData(INITIAL_CHRONO_FORM);
     setCurrentStep(1);
-    setIsSubmitting(false);
-  };
+  }
 
   return (
     <main className={styles.viewport}>
@@ -94,18 +82,21 @@ export default function ChronoPortal() {
           <StepOneMission
             formData={formData}
             onChange={updateField}
-            onNext={() => setCurrentStep(2)}
+            onNext={() => {
+              setCurrentStep(2);
+            }}
           />
         )}
 
         {currentStep === 2 && (
           <StepTwoCalibration
             formData={formData}
-            flux={flux}
-            isSubmitting={isSubmitting}
+            isSubmitting={isPending}
             isCheckingTimeline={false}
             onChange={updateField}
-            onBack={() => setCurrentStep(1)}
+            onBack={() => {
+              setCurrentStep(1);
+            }}
             onSubmit={handleInitiateJump}
           />
         )}

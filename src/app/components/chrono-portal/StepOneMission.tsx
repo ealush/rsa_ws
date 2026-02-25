@@ -28,7 +28,7 @@ export default function StepOneMission({
             type="text"
             value={formData.travelerName}
             placeholder="e.g., Emmett Brown"
-            onChange={(event) => onChange("travelerName", event.target.value)}
+            onChange={function (event) { onChange("travelerName", event.target.value); }}
           />
         }
         name="travelerName"
@@ -41,7 +41,7 @@ export default function StepOneMission({
             type="number"
             value={formData.birthYear}
             placeholder="YYYY"
-            onChange={(event) => onChange("birthYear", event.target.value)}
+            onChange={function (event) { onChange("birthYear", event.target.value); }}
           />
         }
         name="birthYear"
@@ -54,7 +54,7 @@ export default function StepOneMission({
             rows={4}
             value={formData.mission}
             placeholder="State your business in the past/future..."
-            onChange={(event) => onChange("mission", event.target.value)}
+            onChange={function (event) { onChange("mission", event.target.value); }}
           />
         }
         name="mission"

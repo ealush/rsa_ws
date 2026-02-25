@@ -1,23 +1,23 @@
-export const checkTimelineDatabase = (
+export function checkTimelineDatabase(
   _name: string,
   year: number,
   abortSignal?: AbortSignal,
-): Promise<boolean> => {
-  return new Promise((resolve, reject) => {
-    const timeoutId = setTimeout(() => {
+): Promise<boolean> {
+  return new Promise(function (resolve, reject) {
+    const timeoutId = setTimeout(function () {
       resolve(year === 2026);
     }, 600);
 
     if (abortSignal) {
-      abortSignal.addEventListener("abort", () => {
+      abortSignal.addEventListener("abort", function () {
         clearTimeout(timeoutId);
         reject(new DOMException("Aborted", "AbortError"));
       });
     }
   });
-};
+}
 
-export const calculateQuantumFlux = (year: number): number => {
+export function calculateQuantumFlux(year: number): number {
   const baseline = Math.abs(year - 2024) * 1.21;
 
   let burn = 0;
@@ -26,7 +26,7 @@ export const calculateQuantumFlux = (year: number): number => {
   }
 
   return Number((baseline + burn * 0.000001).toFixed(2));
-};
+}
 
 export type CongestionLevel = "CLEAR" | "LIGHT" | "MODERATE" | "HEAVY";
 
