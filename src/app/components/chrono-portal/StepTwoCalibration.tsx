@@ -1,4 +1,7 @@
-import { ChronosSchemaType } from "@/app/validation/chronoVestSuite";
+import {
+  ChronosSchemaType,
+  chronoVestSuite,
+} from "@/app/validation/chronoVestSuite";
 import styles from "../ChronoPortal.module.css";
 import FieldControl from "./FieldControl";
 
@@ -29,9 +32,12 @@ export default function StepTwoCalibration({
         label={
           <span className={styles.inlineLabel}>
             Target Year
-            {isCheckingTimeline ? (
+            {chronoVestSuite.isPending("destinationYear") ? (
               <span className={styles.statusIndicator}>
-                Checking timeline...
+                <span className={styles.pendingIndicator}>
+                  <span className={styles.spinnerRing} />
+                  <span className={styles.pendingLabel}>scanning…</span>
+                </span>
               </span>
             ) : (
               <span className={styles.statusIndicator}>Timeline synced</span>
@@ -73,7 +79,9 @@ export default function StepTwoCalibration({
         <button
           type="button"
           className={styles.primaryBtn}
-          disabled={isSubmitting || isCheckingTimeline}
+          disabled={
+            isSubmitting || isCheckingTimeline || !chronoVestSuite.isValid()
+          }
           onClick={onSubmit}
         >
           {isSubmitting ? "⏳ Initiating jump..." : "INITIATE JUMP"}

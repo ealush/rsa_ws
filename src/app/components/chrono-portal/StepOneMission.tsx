@@ -1,4 +1,7 @@
-import { ChronosSchemaType } from "@/app/validation/chronoVestSuite";
+import {
+  ChronosSchemaType,
+  chronoVestSuite,
+} from "@/app/validation/chronoVestSuite";
 import styles from "../ChronoPortal.module.css";
 import FieldControl from "./FieldControl";
 import { ChronoFormErrors } from "./types";
@@ -57,7 +60,12 @@ export default function StepOneMission({
         name="mission"
       />
 
-      <button type="button" className={styles.primaryBtn} onClick={onNext}>
+      <button
+        type="button"
+        className={styles.primaryBtn}
+        onClick={onNext}
+        disabled={!chronoVestSuite.isValidByGroup("mission")}
+      >
         Next: Calibrate Coordinates →
       </button>
     </>

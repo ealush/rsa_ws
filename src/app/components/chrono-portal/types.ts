@@ -7,7 +7,7 @@ export type ChronoFormErrors = Partial<Record<keyof ChronosSchemaType, string>>;
 export const INITIAL_CHRONO_FORM: ChronosSchemaType = {
   travelerName: "",
   mission: "",
-  birthYear: 0,
-  destinationYear: 0,
-  plutoniumCores: 0,
+  birthYear: "",
+  destinationYear: "",
+  plutoniumCores: "",
 };

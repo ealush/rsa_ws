@@ -27,16 +27,17 @@ export default function ChronoPortal() {
     return calculateQuantumFlux(year);
   }, [formData.destinationYear]);
 
-  const updateField = (key: keyof ChronosSchemaType, value: string) => {
+  const updateField = async (key: keyof ChronosSchemaType, value: string) => {
     const nextState = {
       ...formData,
       [key]: value,
     };
 
-    const res = chronoVestSuite
+    chronoVestSuite
       .only(key)
       .afterEach(() => {
         setFormData({ ...nextState });
+        console.log(chronoVestSuite.get());
       })
       .run(nextState);
   };
