@@ -10,7 +10,7 @@ type StepTwoCalibrationProps = {
   flux: number;
   isSubmitting: boolean;
   isCheckingTimeline: boolean;
-  onChange: (key: keyof ChronosSchemaType, value: string) => void;
+  onChange: (key: keyof ChronosSchemaType, value: string | boolean) => void;
   onBack: () => void;
   onSubmit: () => void;
 };
@@ -56,6 +56,17 @@ export default function StepTwoCalibration({
         }
         name="destinationYear"
       />
+
+      <label className={styles.checkboxLabel}>
+        <input
+          type="checkbox"
+          checked={!!formData.suppressParadoxCheck}
+          onChange={(event) =>
+            onChange("suppressParadoxCheck", event.target.checked)
+          }
+        />
+        Suppress Time Paradox Check
+      </label>
 
       <FieldControl
         label="Plutonium Cores (Gigawatts)"

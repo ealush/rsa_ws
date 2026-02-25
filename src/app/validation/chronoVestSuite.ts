@@ -1,4 +1,4 @@
-import { create, enforce, group, test, useWarn, warn } from "vest";
+import { create, enforce, group, test, useWarn, warn, skipWhen, include, omitWhen } from "vest";
 import { INITIAL_CHRONO_FORM } from "../components/chrono-portal/types";
 import { getCongestion } from "../actions/congestionAction";
 import { memo } from "vest/memo";
@@ -10,11 +10,17 @@ const ChronoSchema = enforce.shape({
   birthYear: enforce.isNumeric().toNumber(),
   destinationYear: enforce.isNumeric().toNumber(),
   plutoniumCores: enforce.isNumeric(),
+  suppressParadoxCheck: enforce.optional(enforce.isBoolean()),
 });
 
 export type ChronosSchemaType = typeof ChronoSchema.infer;
 
 export const chronoVestSuite = create((data = INITIAL_CHRONO_FORM) => {
+  include("destinationYear").when(
+    "suppressParadoxCheck",
+  );
+
+
   group("mission", () => {
     test("travelerName", "Traveler name is required", () => {
       enforce(data.travelerName).isNotBlank();
@@ -54,13 +60,20 @@ export const chronoVestSuite = create((data = INITIAL_CHRONO_FORM) => {
       enforce(data.destinationYear).isNumeric();
     });
 
-    test("destinationYear", "Warning: Avoid meeting yourself!", () => {
-      warn();
+    omitWhen(Boolean(data.suppressParadoxCheck), () => {
+      test("destinationYear", "Possible Time Paradox Detected", () => {
 
-      enforce(data.destinationYear).isNotBetween(
-        Number(data.birthYear),
-        new Date().getFullYear(),
-      );
+        enforce(data.destinationYear).greaterThan(Number(data.birthYear));
+      });
+
+      test("destinationYear", "Warning: Avoid meeting yourself!", () => {
+        warn();
+
+        enforce(data.destinationYear).isNotBetween(
+          Number(data.birthYear),
+          new Date().getFullYear(),
+        );
+      });
     });
 
     memo(() => {
@@ -85,6 +98,15 @@ export const chronoVestSuite = create((data = INITIAL_CHRONO_FORM) => {
 
     test("plutoniumCores", "Plutonium cores must be a number", () => {
       enforce(data.plutoniumCores).isNumeric();
+    });
+
+    test("plutoniumCores", () => {
+      warn();
+      enforce(data.plutoniumCores)
+        .message("⚠️ Moderate use of cores. Use caution")
+        .isNotBetween(3, 6)
+        .message("🚨 Heavy use of cores. Use extreme caution")
+        .lessThan(6);
     });
   });
 }, ChronoSchema);

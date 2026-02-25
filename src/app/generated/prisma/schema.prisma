@@ -9,11 +9,12 @@ datasource db {
 }
 
 model JumpRequest {
-  id              String   @id @default(cuid())
-  travelerName    String
-  mission         String
-  birthYear       Int      @default(1990)
-  destinationYear Int
-  plutoniumCores  Int
-  createdAt       DateTime @default(now())
+  id                   String   @id @default(cuid())
+  travelerName         String
+  mission              String
+  birthYear            Int      @default(1990)
+  destinationYear      Int
+  plutoniumCores       Int
+  suppressParadoxCheck Boolean  @default(false)
+  createdAt            DateTime @default(now())
 }

@@ -8,7 +8,7 @@ import { ChronoFormErrors } from "./types";
 
 type StepOneMissionProps = {
   formData: ChronosSchemaType;
-  onChange: (key: keyof ChronosSchemaType, value: string) => void;
+  onChange: (key: keyof ChronosSchemaType, value: string | boolean) => void;
   onNext: () => void;
 };
 

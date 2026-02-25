@@ -10,6 +10,7 @@ export async function POST(request: Request) {
       birthYear,
       destinationYear,
       plutoniumCores,
+      suppressParadoxCheck,
     } = body;
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -21,6 +22,7 @@ export async function POST(request: Request) {
         birthYear: Number(birthYear),
         destinationYear: Number(destinationYear),
         plutoniumCores: Number(plutoniumCores),
+        suppressParadoxCheck: Boolean(suppressParadoxCheck),
       },
     });
 

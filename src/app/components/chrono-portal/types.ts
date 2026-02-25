@@ -10,4 +10,5 @@ export const INITIAL_CHRONO_FORM: ChronosSchemaType = {
   birthYear: "",
   destinationYear: "",
   plutoniumCores: "",
+  suppressParadoxCheck: false,
 };

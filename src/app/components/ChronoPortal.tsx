@@ -27,7 +27,10 @@ export default function ChronoPortal() {
     return calculateQuantumFlux(year);
   }, [formData.destinationYear]);
 
-  const updateField = async (key: keyof ChronosSchemaType, value: string) => {
+  const updateField = async (
+    key: keyof ChronosSchemaType,
+    value: string | boolean,
+  ) => {
     const nextState = {
       ...formData,
       [key]: value,

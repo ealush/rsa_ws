@@ -62,6 +62,11 @@ export default async function JumpsPage() {
               <span className={styles.cardYear}>→ {jump.destinationYear}</span>
               <p className={styles.cardMission}>{jump.mission}</p>
               <div className={styles.cardFooter}>
+                {jump.suppressParadoxCheck && (
+                  <span className={`${styles.badge} ${styles.badgeParadox}`}>
+                    ⚠ CHECK SUPPRESSED
+                  </span>
+                )}
                 <span
                   className={`${styles.badge} ${
                     isParadox ? styles.badgeParadox : styles.badgeSafe
