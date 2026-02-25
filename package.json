@@ -17,7 +17,7 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-icons": "^5.5.0",
-    "vest": "^6.0.0-next-20260225-19dc",
+    "vest": "^6.0.0-next-20260225-b7b0",
     "zod": "^3.25.7"
   },
   "devDependencies": {
@@ -29,6 +29,6 @@
     "eslint-config-next": "15.3.1",
     "prisma": "^6.6.0",
     "tsx": "^4.19.3",
-    "typescript": "^5"
+    "typescript": "5.9.3"
   }
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useActionState, useEffect, useState } from "react";
+import { SuiteSerializer } from "vest/exports/SuiteSerializer";
 import styles from "./ChronoPortal.module.css";
 import StepOneMission from "./chrono-portal/StepOneMission";
 import StepTwoCalibration from "./chrono-portal/StepTwoCalibration";
@@ -17,21 +18,6 @@ export default function ChronoPortal() {
   const [currentStep, setCurrentStep] = useState<ChronoStep>(1);
   const [formData, setFormData] =
     useState<ChronosSchemaType>(INITIAL_CHRONO_FORM);
-
-  const [jumpState, dispatchJump, isPending] = useActionState(initiateJump, {
-    success: null,
-  });
-
-  useEffect(
-    function () {
-      if (jumpState.success === true) {
-        setCurrentStep(3);
-      } else if (jumpState.success === false) {
-        setCurrentStep(2);
-      }
-    },
-    [jumpState],
-  );
 
   async function updateField(
     key: keyof ChronosSchemaType,
@@ -50,8 +36,8 @@ export default function ChronoPortal() {
       .run(nextState);
   }
 
-  function handleInitiateJump() {
-    dispatchJump({
+  async function handleInitiateJump() {
+    const result = await initiateJump({
       travelerName: formData.travelerName,
       mission: formData.mission,
       birthYear: Number(formData.birthYear),
@@ -59,11 +45,11 @@ export default function ChronoPortal() {
       plutoniumCores: Number(formData.plutoniumCores),
       suppressParadoxCheck: Boolean(formData.suppressParadoxCheck),
     });
-  }
 
-  function handleReset() {
-    setFormData(INITIAL_CHRONO_FORM);
-    setCurrentStep(1);
+    if (result) {
+      SuiteSerializer.resume(chronoVestSuite, result);
+      setFormData({ ...formData });
+    }
   }
 
   return (
@@ -91,7 +77,6 @@ export default function ChronoPortal() {
         {currentStep === 2 && (
           <StepTwoCalibration
             formData={formData}
-            isSubmitting={isPending}
             isCheckingTimeline={false}
             onChange={updateField}
             onBack={() => {
@@ -105,4 +90,9 @@ export default function ChronoPortal() {
       </section>
     </main>
   );
+
+  function handleReset() {
+    setFormData(INITIAL_CHRONO_FORM);
+    setCurrentStep(1);
+  }
 }

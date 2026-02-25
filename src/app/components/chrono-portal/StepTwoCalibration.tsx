@@ -9,7 +9,6 @@ import FieldControl from "./FieldControl";
 
 type StepTwoCalibrationProps = {
   formData: ChronosSchemaType;
-  isSubmitting: boolean;
   isCheckingTimeline: boolean;
   onChange: (key: keyof ChronosSchemaType, value: string | boolean) => void;
   onBack: () => void;
@@ -18,7 +17,6 @@ type StepTwoCalibrationProps = {
 
 export default function StepTwoCalibration({
   formData,
-  isSubmitting,
   isCheckingTimeline,
   onChange,
   onBack,
@@ -103,10 +101,10 @@ export default function StepTwoCalibration({
         <button
           type="button"
           className={styles.primaryBtn}
-          disabled={isSubmitting || isCheckingTimeline}
+          disabled={isCheckingTimeline}
           onClick={onSubmit}
         >
-          {isSubmitting ? "⏳ Initiating jump..." : "INITIATE JUMP"}
+          INITIATE JUMP
         </button>
       </div>
     </>

@@ -100,6 +100,11 @@ export const chronoVestSuite = create(function chronoSuite(data = INITIAL_CHRONO
       enforce(data.plutoniumCores).isNumeric();
     });
 
+
+    test("plutoniumCores", "Plutonium cores must greater than zero!", function () {
+      enforce(data.plutoniumCores).greaterThan(0);
+    });
+
     test("plutoniumCores", function () {
       warn();
       enforce(data.plutoniumCores)

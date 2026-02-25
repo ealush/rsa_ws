@@ -1,14 +1,17 @@
 "use server";
 
 import { setTimeout } from "node:timers/promises";
+import { redirect } from "next/navigation";
+import { SuiteSerializer } from "vest/exports/SuiteSerializer";
 import { prisma } from "@/app/db/prismaClient";
+import { chronoVestSuite } from "@/app/validation/chronoVestSuite";
 
 export type JumpActionState = {
   success: boolean | null;
+  vestState?: unknown;
 };
 
 export async function initiateJump(
-  _prevState: JumpActionState,
   data: {
     travelerName: string;
     mission: string;
@@ -17,23 +20,25 @@ export async function initiateJump(
     plutoniumCores: number;
     suppressParadoxCheck: boolean;
   },
-): Promise<JumpActionState> {
-  try {
-    await setTimeout(1000);
+): Promise<string | void> {
+  const result = chronoVestSuite.runStatic(data);
 
-    await prisma.jumpRequest.create({
-      data: {
-        travelerName: String(data.travelerName),
-        mission: String(data.mission),
-        birthYear: Number(data.birthYear),
-        destinationYear: Number(data.destinationYear),
-        plutoniumCores: Number(data.plutoniumCores),
-        suppressParadoxCheck: Boolean(data.suppressParadoxCheck),
-      },
-    });
+  await setTimeout(1000);
 
-    return { success: true };
-  } catch {
-    return { success: false };
+  if (!result.isValid()) {
+    return SuiteSerializer.serialize(chronoVestSuite);
   }
+
+  await prisma.jumpRequest.create({
+    data: {
+      travelerName: String(data.travelerName),
+      mission: String(data.mission),
+      birthYear: Number(data.birthYear),
+      destinationYear: Number(data.destinationYear),
+      plutoniumCores: Number(data.plutoniumCores),
+      suppressParadoxCheck: Boolean(data.suppressParadoxCheck),
+    },
+  });
+
+  redirect("/jumps");
 }
