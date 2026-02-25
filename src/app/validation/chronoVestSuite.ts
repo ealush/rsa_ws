@@ -74,8 +74,9 @@ export const chronoVestSuite = create(function chronoSuite(data = INITIAL_CHRONO
           new Date().getFullYear(),
         );
       });
-    });
 
+    });
+    
     memo(function () {
       test(
         "destinationYear",

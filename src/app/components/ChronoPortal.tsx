@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect, useState } from "react";
+import { useState, useTransition } from "react";
 import { SuiteSerializer } from "vest/exports/SuiteSerializer";
 import styles from "./ChronoPortal.module.css";
 import StepOneMission from "./chrono-portal/StepOneMission";
@@ -18,6 +18,7 @@ export default function ChronoPortal() {
   const [currentStep, setCurrentStep] = useState<ChronoStep>(1);
   const [formData, setFormData] =
     useState<ChronosSchemaType>(INITIAL_CHRONO_FORM);
+  const [isSubmitting, startSubmitTransition] = useTransition();
 
   async function updateField(
     key: keyof ChronosSchemaType,
@@ -37,19 +38,21 @@ export default function ChronoPortal() {
   }
 
   async function handleInitiateJump() {
-    const result = await initiateJump({
-      travelerName: formData.travelerName,
-      mission: formData.mission,
-      birthYear: Number(formData.birthYear),
-      destinationYear: Number(formData.destinationYear),
-      plutoniumCores: Number(formData.plutoniumCores),
-      suppressParadoxCheck: Boolean(formData.suppressParadoxCheck),
-    });
+    startSubmitTransition(async function () {
+      const result = await initiateJump({
+        travelerName: formData.travelerName,
+        mission: formData.mission,
+        birthYear: Number(formData.birthYear),
+        destinationYear: Number(formData.destinationYear),
+        plutoniumCores: Number(formData.plutoniumCores),
+        suppressParadoxCheck: Boolean(formData.suppressParadoxCheck),
+      });
 
-    if (result) {
-      SuiteSerializer.resume(chronoVestSuite, result);
-      setFormData({ ...formData });
-    }
+      if (result) {
+        SuiteSerializer.resume(chronoVestSuite, result);
+        setFormData({ ...formData });
+      }
+    });
   }
 
   return (
@@ -78,6 +81,7 @@ export default function ChronoPortal() {
           <StepTwoCalibration
             formData={formData}
             isCheckingTimeline={false}
+            isSubmitting={isSubmitting}
             onChange={updateField}
             onBack={() => {
               setCurrentStep(1);

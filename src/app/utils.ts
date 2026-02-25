@@ -44,7 +44,7 @@ export type CongestionInfo = {
  * then maps it to a congestion tier.
  */
 export function genYearCongestion(year: number): CongestionInfo {
-  const count = (Math.abs(year) % 8) + 1; // 1–8, stable per year
+  const count = (Math.abs(year) % 18) + 1; // 1–18, stable per year
 
   if (count <= 2) {
     return {
@@ -54,7 +54,7 @@ export function genYearCongestion(year: number): CongestionInfo {
       label: "Clear — no registered jumpers in this era",
     };
   }
-  if (count <= 4) {
+  if (count <= 3) {
     return {
       level: "LIGHT",
       count,
@@ -70,10 +70,11 @@ export function genYearCongestion(year: number): CongestionInfo {
       label: `Moderate — ${count} travellers, congestion forming`,
     };
   }
+  const heavyCount = Math.floor(Math.random() * 193) + 8;
   return {
     level: "HEAVY",
-    count,
+    count: heavyCount,
     icon: "▲",
-    label: `Heavy — ${count} travellers, elevated paradox risk`,
+    label: `Heavy — ${heavyCount} travellers, elevated risk`,
   };
 }

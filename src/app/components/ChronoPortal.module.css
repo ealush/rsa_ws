@@ -8,16 +8,18 @@
 
 .card {
   width: min(760px, 100%);
-  border: 1px solid #00eeff;
+  border: 1px solid rgba(0, 238, 255, 0.7);
   background: linear-gradient(
     180deg,
-    rgba(0, 10, 24, 0.95),
-    rgba(0, 7, 16, 0.96)
+    rgba(6, 4, 22, 0.96),
+    rgba(3, 2, 16, 0.97)
   );
   box-shadow:
-    0 0 0 1px rgba(0, 238, 255, 0.22),
-    0 0 22px rgba(0, 238, 255, 0.3),
-    inset 0 0 36px rgba(0, 132, 255, 0.1);
+    0 0 0 1px rgba(0, 238, 255, 0.25),
+    0 0 30px rgba(0, 238, 255, 0.35),
+    0 0 80px rgba(140, 40, 220, 0.12),
+    inset 0 0 40px rgba(0, 80, 255, 0.08),
+    inset 0 0 60px rgba(100, 30, 180, 0.06);
   border-radius: 2px;
   padding: 1.8rem;
   display: grid;
@@ -37,6 +39,9 @@
   color: #ffbf1f;
   font-size: 1.7rem;
   letter-spacing: 0.02em;
+  text-shadow:
+    0 0 8px rgba(255, 191, 31, 0.5),
+    0 0 20px rgba(255, 191, 31, 0.2);
 }
 
 .registryLink {
@@ -46,14 +51,17 @@
   border: 1px solid rgba(0, 238, 255, 0.35);
   padding: 0.3rem 0.75rem;
   white-space: nowrap;
+  text-shadow: 0 0 6px rgba(42, 233, 255, 0.3);
   transition:
     box-shadow 0.15s ease,
-    border-color 0.15s ease;
+    border-color 0.15s ease,
+    text-shadow 0.15s ease;
 }
 
 .registryLink:hover {
   border-color: #00eeff;
-  box-shadow: 0 0 10px rgba(0, 238, 255, 0.3);
+  box-shadow: 0 0 14px rgba(0, 238, 255, 0.4);
+  text-shadow: 0 0 10px rgba(42, 233, 255, 0.6);
 }
 
 .card h1 {
@@ -61,6 +69,9 @@
   margin-bottom: 0.7rem;
   font-size: clamp(1.7rem, 2.4vw, 3.1rem);
   letter-spacing: 0.02em;
+  text-shadow:
+    0 0 10px rgba(42, 233, 255, 0.6),
+    0 0 30px rgba(160, 80, 255, 0.2);
 }
 
 .fieldLabel {
@@ -68,17 +79,24 @@
   gap: 0.45rem;
   color: #d8f4ff;
   font-size: clamp(1.05rem, 1.2vw, 1.8rem);
+  text-shadow: 0 0 4px rgba(216, 244, 255, 0.15);
 }
 
 .fieldLabel input,
 .fieldLabel textarea {
   width: 100%;
-  border: 1px solid #00eeff;
+  border: 1px solid rgba(0, 238, 255, 0.6);
   border-radius: 0;
-  background: rgba(0, 3, 8, 0.86);
+  background: rgba(8, 2, 18, 0.88);
   color: #ddfbff;
   padding: 0.72rem 0.82rem;
   font: inherit;
+  box-shadow:
+    0 0 6px rgba(0, 238, 255, 0.1),
+    0 0 4px rgba(160, 50, 255, 0.06);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .fieldLabel textarea {
@@ -89,21 +107,29 @@
 .fieldLabel textarea:focus {
   outline: none;
   border-color: #29f5ff;
-  box-shadow: 0 0 12px rgba(0, 238, 255, 0.5);
+  box-shadow:
+    0 0 14px rgba(0, 238, 255, 0.5),
+    0 0 30px rgba(160, 80, 255, 0.18);
 }
 
-.errorText,
-.warningText {
-  min-height: 1.2rem;
+.fieldMessage {
   font-size: 1.35rem;
+  line-height: 1.3;
+  min-height: calc(1.35rem * 1.3);
   margin-top: 0.05rem;
 }
 
 .warningText {
   color: #ffbf1f;
+  text-shadow:
+    0 0 6px rgba(255, 191, 31, 0.4),
+    0 0 16px rgba(255, 191, 31, 0.15);
 }
 .errorText {
-  color: #ff6c65;
+  color: #ff5ea0;
+  text-shadow:
+    0 0 6px rgba(255, 94, 160, 0.45),
+    0 0 16px rgba(255, 94, 160, 0.15);
 }
 
 .checkboxLabel {
@@ -115,6 +141,7 @@
   cursor: pointer;
   margin: 0.5rem 0;
   user-select: none;
+  text-shadow: 0 0 4px rgba(216, 244, 255, 0.15);
 }
 
 .checkboxLabel input {
@@ -133,12 +160,18 @@
 .statusIndicator {
   color: #24ffcb;
   font-size: 1.25rem;
+  text-shadow:
+    0 0 6px rgba(36, 255, 203, 0.5),
+    0 0 18px rgba(36, 255, 203, 0.2);
 }
 
 .fluxText {
   color: #ffbf1f;
   margin: 0.95rem 0 0.95rem;
   font-size: 1.6rem;
+  text-shadow:
+    0 0 8px rgba(255, 191, 31, 0.45),
+    0 0 22px rgba(255, 191, 31, 0.15);
 }
 
 .actions {
@@ -152,26 +185,34 @@
 .secondaryBtn {
   border-radius: 0;
   padding: 0.78rem 1.15rem;
-  border: 1px solid #00eeff;
+  border: 1px solid rgba(0, 238, 255, 0.5);
   cursor: pointer;
   font: inherit;
   font-size: 1.8rem;
   min-width: 176px;
   transition:
     box-shadow 0.15s ease,
-    transform 0.15s ease;
+    transform 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .primaryBtn {
-  background: rgba(0, 74, 112, 0.45);
+  background: linear-gradient(135deg, rgba(50, 0, 100, 0.25), rgba(0, 74, 112, 0.4));
   color: #d7fbff;
-  box-shadow: 0 0 14px rgba(0, 238, 255, 0.27);
+  text-shadow: 0 0 6px rgba(215, 251, 255, 0.3);
+  box-shadow:
+    0 0 14px rgba(0, 238, 255, 0.27),
+    0 0 30px rgba(160, 80, 255, 0.1),
+    0 0 4px rgba(0, 238, 255, 0.15) inset;
 }
 
 .primaryBtn:hover,
 .secondaryBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 0 18px rgba(0, 238, 255, 0.36);
+  border-color: #00eeff;
+  box-shadow:
+    0 0 20px rgba(0, 238, 255, 0.4),
+    0 0 50px rgba(160, 80, 255, 0.15);
 }
 
 .primaryBtn:disabled {
@@ -182,8 +223,9 @@
 }
 
 .secondaryBtn {
-  background: rgba(0, 20, 30, 0.7);
+  background: rgba(8, 5, 22, 0.7);
   color: #d8feff;
+  text-shadow: 0 0 4px rgba(216, 254, 255, 0.2);
 }
 
 .successCopy {
@@ -213,7 +255,9 @@
   border: 2px solid rgba(0, 238, 255, 0.15);
   border-top-color: #2ae9ff;
   animation: chronoSpin 0.8s linear infinite;
-  box-shadow: 0 0 8px rgba(0, 238, 255, 0.35);
+  box-shadow:
+    0 0 8px rgba(0, 238, 255, 0.4),
+    0 0 16px rgba(160, 80, 255, 0.15);
   flex-shrink: 0;
 }
 
@@ -221,6 +265,7 @@
   color: #2ae9ff;
   font-size: 1.15rem;
   letter-spacing: 0.06em;
+  text-shadow: 0 0 8px rgba(42, 233, 255, 0.4);
   animation: chronoPulse 1.6s ease-in-out infinite;
 }
 

@@ -24,7 +24,7 @@ export default function FieldControl({
         {label}
         <span className={styles.inputWrapper}>{input}</span>
       </label>
-      <p className={cn(name)}>{chronoVestSuite.getMessage(name)}</p>
+      <p className={`${styles.fieldMessage} ${cn(name)}`}>{chronoVestSuite.getMessage(name)}</p>
     </>
   );
 }
