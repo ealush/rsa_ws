@@ -25,10 +25,16 @@
   font-size: 1.6rem;
   letter-spacing: 0.05em;
   text-decoration: none;
+  text-shadow:
+    0 0 8px rgba(255, 191, 31, 0.5),
+    0 0 20px rgba(255, 191, 31, 0.2);
 }
 
 .navBrand:hover {
   color: #ffd75a;
+  text-shadow:
+    0 0 10px rgba(255, 215, 90, 0.6),
+    0 0 28px rgba(255, 191, 31, 0.3);
 }
 
 .navLink {
@@ -44,7 +50,8 @@
 
 .navLink:hover {
   border-color: #00eeff;
-  box-shadow: 0 0 10px rgba(0, 238, 255, 0.3);
+  box-shadow: 0 0 14px rgba(0, 238, 255, 0.4);
+  text-shadow: 0 0 8px rgba(42, 233, 255, 0.5);
 }
 
 /* ── Page heading ────────────────────────────────── */
@@ -58,12 +65,18 @@
   font-size: clamp(2rem, 3.5vw, 3.4rem);
   letter-spacing: 0.03em;
   margin-bottom: 0.35rem;
+  text-shadow:
+    0 0 10px rgba(42, 233, 255, 0.6),
+    0 0 30px rgba(160, 80, 255, 0.2);
 }
 
 .eyebrow {
   color: #ffbf1f;
   font-size: 1.3rem;
   letter-spacing: 0.04em;
+  text-shadow:
+    0 0 6px rgba(255, 191, 31, 0.4),
+    0 0 16px rgba(255, 191, 31, 0.15);
 }
 
 /* ── Jump list ───────────────────────────────────── */
@@ -92,9 +105,10 @@
     rgba(0, 7, 16, 0.96)
   );
   box-shadow:
-    0 0 0 1px rgba(0, 238, 255, 0.12),
-    0 0 18px rgba(0, 238, 255, 0.12),
-    inset 0 0 28px rgba(0, 100, 200, 0.06);
+    0 0 0 1px rgba(0, 238, 255, 0.15),
+    0 0 22px rgba(0, 238, 255, 0.16),
+    0 0 60px rgba(140, 40, 220, 0.08),
+    inset 0 0 28px rgba(0, 100, 200, 0.08);
   border-radius: 2px;
   padding: 1.4rem;
   display: grid;
@@ -109,9 +123,10 @@
 .card:hover {
   border-color: #00eeff;
   box-shadow:
-    0 0 0 1px rgba(0, 238, 255, 0.35),
-    0 0 30px rgba(0, 238, 255, 0.28),
-    inset 0 0 36px rgba(0, 132, 255, 0.1);
+    0 0 0 1px rgba(0, 238, 255, 0.42),
+    0 0 36px rgba(0, 238, 255, 0.34),
+    0 0 80px rgba(140, 40, 220, 0.12),
+    inset 0 0 36px rgba(0, 132, 255, 0.12);
   transform: translateY(-2px);
 }
 
@@ -125,6 +140,7 @@
   color: #2ae9ff;
   font-size: 1.6rem;
   letter-spacing: 0.02em;
+  text-shadow: 0 0 8px rgba(42, 233, 255, 0.4);
 }
 
 .cardYear {
@@ -132,6 +148,9 @@
   font-size: 2rem;
   font-weight: bold;
   letter-spacing: 0.04em;
+  text-shadow:
+    0 0 8px rgba(255, 191, 31, 0.5),
+    0 0 20px rgba(255, 191, 31, 0.2);
 }
 
 .cardMission {
@@ -163,12 +182,14 @@
   background: rgba(255, 60, 60, 0.18);
   border: 1px solid rgba(255, 80, 80, 0.5);
   color: #ff8080;
+  text-shadow: 0 0 6px rgba(255, 80, 80, 0.4);
 }
 
 .badgeSafe {
   background: rgba(0, 255, 160, 0.1);
   border: 1px solid rgba(0, 255, 160, 0.3);
   color: #24ffcb;
+  text-shadow: 0 0 6px rgba(36, 255, 203, 0.4);
 }
 
 .cardDate {
@@ -187,9 +208,10 @@
     rgba(0, 7, 16, 0.96)
   );
   box-shadow:
-    0 0 0 1px rgba(0, 238, 255, 0.22),
-    0 0 22px rgba(0, 238, 255, 0.3),
-    inset 0 0 36px rgba(0, 132, 255, 0.1);
+    0 0 0 1px rgba(0, 238, 255, 0.26),
+    0 0 28px rgba(0, 238, 255, 0.36),
+    0 0 70px rgba(140, 40, 220, 0.1),
+    inset 0 0 36px rgba(0, 132, 255, 0.12);
   border-radius: 2px;
   padding: 2rem;
   display: grid;
@@ -200,6 +222,9 @@
   color: #2ae9ff;
   font-size: clamp(1.8rem, 2.8vw, 3rem);
   letter-spacing: 0.02em;
+  text-shadow:
+    0 0 10px rgba(42, 233, 255, 0.6),
+    0 0 30px rgba(160, 80, 255, 0.2);
 }
 
 .paradoxAlert {
@@ -209,6 +234,8 @@
   padding: 0.85rem 1.1rem;
   font-size: 1.35rem;
   line-height: 1.5;
+  text-shadow: 0 0 6px rgba(255, 80, 80, 0.35);
+  box-shadow: 0 0 16px rgba(255, 60, 60, 0.1);
 }
 
 .fields {
@@ -237,6 +264,9 @@
   color: #ffbf1f;
   font-size: 2rem;
   font-weight: bold;
+  text-shadow:
+    0 0 8px rgba(255, 191, 31, 0.5),
+    0 0 20px rgba(255, 191, 31, 0.2);
 }
 
 .missionBlock {
@@ -265,7 +295,8 @@
 
 .backLink:hover {
   border-color: #00eeff;
-  box-shadow: 0 0 10px rgba(0, 238, 255, 0.3);
+  box-shadow: 0 0 14px rgba(0, 238, 255, 0.4);
+  text-shadow: 0 0 8px rgba(42, 233, 255, 0.5);
 }
 
 /* ── Congestion indicator ─────────────────────────── */
@@ -277,19 +308,24 @@
 
 .congestionCLEAR {
   color: #24ffcb;
+  text-shadow: 0 0 6px rgba(36, 255, 203, 0.45);
 }
 .congestionLIGHT {
   color: #2ae9ff;
+  text-shadow: 0 0 6px rgba(42, 233, 255, 0.45);
 }
 .congestionMODERATE {
   color: #ffbf1f;
+  text-shadow: 0 0 6px rgba(255, 191, 31, 0.45);
 }
 .congestionHEAVY {
   color: #ff8080;
+  text-shadow: 0 0 6px rgba(255, 80, 80, 0.45);
 }
 
 .warning {
   color: #ffbf1f;
+  text-shadow: 0 0 6px rgba(255, 191, 31, 0.4);
 }
 
 @media (max-width: 600px) {
