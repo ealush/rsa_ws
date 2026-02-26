@@ -28,7 +28,7 @@ export async function createJumpRequest(
   await setTimeout(1000);
 
   // if (!result.isValid()) {
-  //   return SuiteSerializer.serialize(chronoVestSuite);
+  //   return SuiteSerializer.serialize(result);
   // }
 
   await prisma.jumpRequest.create({
@@ -41,9 +41,10 @@ export async function createJumpRequest(
       suppressParadoxCheck: Boolean(data.suppressParadoxCheck),
     },
   });
+
+  redirect("/jumps");
 }
 
 export async function initiateJump(data: JumpData): Promise<string | void> {
-  await createJumpRequest(data);
-  redirect("/jumps");
+  return await createJumpRequest(data);
 }
