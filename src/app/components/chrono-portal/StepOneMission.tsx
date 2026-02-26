@@ -1,10 +1,6 @@
-import {
-  ChronosSchemaType,
-  chronoVestSuite,
-} from "@/app/validation/chronoVestSuite";
+import { ChronosSchemaType } from "@/app/validation/chronoVestSuite";
 import styles from "../ChronoPortal.module.css";
 import FieldControl from "./FieldControl";
-import { ChronoFormErrors } from "./types";
 
 type StepOneMissionProps = {
   formData: ChronosSchemaType;
@@ -28,7 +24,9 @@ export default function StepOneMission({
             type="text"
             value={formData.travelerName}
             placeholder="e.g., Emmett Brown"
-            onChange={function (event) { onChange("travelerName", event.target.value); }}
+            onChange={function (event) {
+              onChange("travelerName", event.target.value);
+            }}
           />
         }
         name="travelerName"
@@ -41,7 +39,9 @@ export default function StepOneMission({
             type="number"
             value={formData.birthYear}
             placeholder="YYYY"
-            onChange={function (event) { onChange("birthYear", event.target.value); }}
+            onChange={function (event) {
+              onChange("birthYear", event.target.value);
+            }}
           />
         }
         name="birthYear"
@@ -54,18 +54,15 @@ export default function StepOneMission({
             rows={4}
             value={formData.mission}
             placeholder="State your business in the past/future..."
-            onChange={function (event) { onChange("mission", event.target.value); }}
+            onChange={function (event) {
+              onChange("mission", event.target.value);
+            }}
           />
         }
         name="mission"
       />
 
-      <button
-        type="button"
-        className={styles.primaryBtn}
-        onClick={onNext}
-        disabled={!chronoVestSuite.isValidByGroup("mission")}
-      >
+      <button type="button" className={styles.primaryBtn} onClick={onNext}>
         Next: Calibrate Coordinates →
       </button>
     </>

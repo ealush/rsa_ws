@@ -2,9 +2,9 @@
 
 import { setTimeout } from "node:timers/promises";
 import { redirect } from "next/navigation";
-import { SuiteSerializer } from "vest/exports/SuiteSerializer";
+// import { SuiteSerializer } from "vest/exports/SuiteSerializer";
 import { prisma } from "@/app/db/prismaClient";
-import { chronoVestSuite } from "@/app/validation/chronoVestSuite";
+// import { chronoVestSuite } from "@/app/validation/chronoVestSuite";
 
 export type JumpActionState = {
   success: boolean | null;
@@ -21,13 +21,13 @@ export async function initiateJump(
     suppressParadoxCheck: boolean;
   },
 ): Promise<string | void> {
-  const result = chronoVestSuite.runStatic(data);
+  // const result = chronoVestSuite.runStatic(data);
 
   await setTimeout(1000);
 
-  if (!result.isValid()) {
-    return SuiteSerializer.serialize(chronoVestSuite);
-  }
+  // if (!result.isValid()) {
+  //   return SuiteSerializer.serialize(chronoVestSuite);
+  // }
 
   await prisma.jumpRequest.create({
     data: {

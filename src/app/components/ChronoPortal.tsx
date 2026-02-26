@@ -2,16 +2,12 @@
 
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import { SuiteSerializer } from "vest/exports/SuiteSerializer";
 import styles from "./ChronoPortal.module.css";
 import StepOneMission from "./chrono-portal/StepOneMission";
 import StepTwoCalibration from "./chrono-portal/StepTwoCalibration";
 import StepThreeSuccess from "./chrono-portal/StepThreeSuccess";
 import { INITIAL_CHRONO_FORM, ChronoStep } from "./chrono-portal/types";
-import {
-  ChronosSchemaType,
-  chronoVestSuite,
-} from "../validation/chronoVestSuite";
+import { ChronosSchemaType } from "../validation/chronoVestSuite";
 import { initiateJump } from "../actions/jumpAction";
 
 export default function ChronoPortal() {
@@ -29,17 +25,12 @@ export default function ChronoPortal() {
       [key]: value,
     };
 
-    chronoVestSuite
-      .only(key)
-      .afterEach(function () {
-        setFormData({ ...nextState });
-      })
-      .run(nextState);
+    setFormData({ ...nextState });
   }
 
   async function handleInitiateJump() {
     startSubmitTransition(async function () {
-      const result = await initiateJump({
+      await initiateJump({
         travelerName: formData.travelerName,
         mission: formData.mission,
         birthYear: Number(formData.birthYear),
@@ -48,10 +39,10 @@ export default function ChronoPortal() {
         suppressParadoxCheck: Boolean(formData.suppressParadoxCheck),
       });
 
-      if (result) {
-        SuiteSerializer.resume(chronoVestSuite, result);
-        setFormData({ ...formData });
-      }
+      // if (result) {
+      //   SuiteSerializer.resume(chronoVestSuite, result);
+      //   setFormData({ ...formData });
+      // }
     });
   }
 

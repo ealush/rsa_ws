@@ -1,7 +1,5 @@
-import { chronoVestSuite } from "@/app/validation/chronoVestSuite";
 import styles from "../ChronoPortal.module.css";
 import { ReactNode } from "react";
-import classnames from "vest/classnames";
 
 type FieldControlProps = {
   label: ReactNode;
@@ -14,17 +12,16 @@ export default function FieldControl({
   input,
   name,
 }: FieldControlProps) {
-  const cn = classnames(chronoVestSuite.get(), {
-    warning: styles.warningText,
-    invalid: styles.errorText,
-  });
   return (
     <>
       <label className={styles.fieldLabel}>
         {label}
         <span className={styles.inputWrapper}>{input}</span>
       </label>
-      <p className={`${styles.fieldMessage} ${cn(name)}`}>{chronoVestSuite.getMessage(name)}</p>
+      <p className={`${styles.fieldMessage}`}></p>
     </>
   );
 }
+
+// styles.warningText
+// styles.errorText

@@ -1,8 +1,5 @@
 import { useMemo } from "react";
-import {
-  ChronosSchemaType,
-  chronoVestSuite,
-} from "@/app/validation/chronoVestSuite";
+import { ChronosSchemaType } from "@/app/validation/chronoVestSuite";
 import { calculateQuantumFlux } from "@/app/utils";
 import styles from "../ChronoPortal.module.css";
 import FieldControl from "./FieldControl";
@@ -43,7 +40,7 @@ export default function StepTwoCalibration({
         label={
           <span className={styles.inlineLabel}>
             Target Year
-            {chronoVestSuite.isPending("destinationYear") ? (
+            {isCheckingTimeline ? (
               <span className={styles.statusIndicator}>
                 <span className={styles.pendingIndicator}>
                   <span className={styles.spinnerRing} />
