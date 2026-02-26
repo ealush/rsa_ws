@@ -11,16 +11,18 @@ export type JumpActionState = {
   vestState?: unknown;
 };
 
-export async function initiateJump(
-  data: {
-    travelerName: string;
-    mission: string;
-    birthYear: number;
-    destinationYear: number;
-    plutoniumCores: number;
-    suppressParadoxCheck: boolean;
-  },
-): Promise<string | void> {
+export type JumpData = {
+  travelerName: string;
+  mission: string;
+  birthYear: number;
+  destinationYear: number;
+  plutoniumCores: number;
+  suppressParadoxCheck: boolean;
+};
+
+export async function createJumpRequest(
+  data: JumpData,
+): Promise<void | string> {
   // const result = chronoVestSuite.runStatic(data);
 
   await setTimeout(1000);
@@ -39,6 +41,9 @@ export async function initiateJump(
       suppressParadoxCheck: Boolean(data.suppressParadoxCheck),
     },
   });
+}
 
+export async function initiateJump(data: JumpData): Promise<string | void> {
+  await createJumpRequest(data);
   redirect("/jumps");
 }

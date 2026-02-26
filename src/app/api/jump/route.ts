@@ -1,38 +1,19 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/app/db/prismaClient";
+import { createJumpRequest } from "@/app/actions/jumpAction";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const {
-      travelerName,
-      mission,
-      birthYear,
-      destinationYear,
-      plutoniumCores,
-      suppressParadoxCheck,
-    } = body;
 
-    await new Promise(function (resolve) { setTimeout(resolve, 1000); });
-
-    await prisma.jumpRequest.create({
-      data: {
-        travelerName: String(travelerName),
-        mission: String(mission),
-        birthYear: Number(birthYear),
-        destinationYear: Number(destinationYear),
-        plutoniumCores: Number(plutoniumCores),
-        suppressParadoxCheck: Boolean(suppressParadoxCheck),
-      },
-    });
+    const payload = await createJumpRequest(body);
 
     return NextResponse.json(
-      { success: true, message: "Coordinates locked." },
+      { success: true, payload: payload },
       { status: 200 },
     );
   } catch {
     return NextResponse.json(
-      { success: false, message: "Internal Server Error" },
+      { success: false, payload: "Internal Server Error" },
       { status: 500 },
     );
   }
